@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#10243a">
+    <meta name="description" content="Interaktives Physik-Lernlabor: Erdrotation, Mondphasen, Jahreszeiten und Finsternisse verständlich erklärt.">
+    <title>Physik – Schatten aus dem All</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="accessibility.css">
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#start">Zum Inhalt springen</a>
+    <header class="hero">
+      <div class="hero-inner">
+        <p class="eyebrow">PHYSIK · KLASSE 7 · REALSCHULE BW</p>
+        <h1>Physik:<br><em>Schatten aus dem All</em></h1>
+        <p class="intro">Dreh an der Erde, begleite den Mond und finde heraus, wie Licht und Schatten den Himmel verändern.</p>
+        <a class="button light" href="#start">Los geht’s <span aria-hidden="true">↓</span></a>
+        <div class="hero-moon" aria-hidden="true"></div>
+        <span class="orbit orbit-one" aria-hidden="true"></span>
+        <span class="orbit orbit-two" aria-hidden="true"></span>
+      </div>
+    </header>
+
+    <nav class="chapter-nav" aria-label="Lernabschnitte">
+      <a href="#tag-nacht">01 Tag &amp; Nacht</a>
+      <a href="#mondphasen">02 Mondphasen</a>
+      <a href="#jahreszeiten">03 Jahreszeiten</a>
+      <a href="#finsternisse">04 Finsternisse</a>
+      <a href="#check">05 Selbsttest</a>
+    </nav>
+
+    <main id="start">
+      <section class="welcome">
+        <div>
+          <p class="kicker">DEIN HIMMELS-LABOR</p>
+          <h2>Erst beobachten,<br>danach erklären.</h2>
+        </div>
+        <p>Arbeite dich Schritt für Schritt durch die Modelle. Größen und Abstände sind vereinfacht und nicht maßstabsgetreu. Entscheidend ist, woher das Licht kommt und wie sich die Himmelskörper bewegen.</p>
+      </section>
+
+      <section class="lesson" id="tag-nacht">
+        <div class="lesson-head">
+          <span class="number">01</span>
+          <div><p class="kicker">DIE ERDE DREHT SICH</p><h2>Warum gibt es Tag und Nacht?</h2></div>
+        </div>
+        <div class="split">
+          <div class="explain">
+            <p>Die Sonne beleuchtet immer eine Hälfte der Erde. Auf der beleuchteten Seite ist <strong>Tag</strong>, auf der abgewandten Seite <strong>Nacht</strong>. Weil sich die Erde um ihre Achse dreht, wandern Orte durch Licht und Schatten.</p>
+            <p>Eine Drehung dauert ungefähr <strong>24 Stunden</strong>. Die Erdachse bleibt in diesem vereinfachten Modell parallel ausgerichtet.</p>
+            <details><summary>Hilfekarte</summary><p>Stell dir eine beleuchtete Kugel vor. Dreht sich ein Ort auf ihrer Oberfläche ins Licht, beginnt dort der Tag. Dreht er vom Licht weg, beginnt die Nacht.</p></details>
+            <div class="task">
+              <h3>Aufgabe · Folge deinem Ort</h3>
+              <p>Bewege den Regler. Wann hat der markierte Ort Tag, wann Nacht?</p>
+              <label for="day-slider">Uhrzeit <output id="day-value">12:00 Uhr</output></label>
+              <input id="day-slider" type="range" min="0" max="24" value="12" step="1">
+              <div class="feedback" id="day-feedback" aria-live="polite"></div>
+            </div>
+          </div>
+          <div class="sim-card">
+            <div class="sim-title"><span>ERDROTATION</span><span class="live-dot">● LIVE-MODELL</span></div>
+            <svg id="earth-sim" viewBox="0 0 420 320" role="img" aria-label="Modell von Tag und Nacht: Sonne links, beleuchtete Erdseite links">
+              <defs>
+                <linearGradient id="earthLight" x1="0" x2="1">
+                  <stop offset="0%" stop-color="#4fc6c1"></stop>
+                  <stop offset="50%" stop-color="#4fc6c1"></stop>
+                  <stop offset="50%" stop-color="#12304a"></stop>
+                  <stop offset="100%" stop-color="#12304a"></stop>
+                </linearGradient>
+                <clipPath id="earthClip"><circle cx="210" cy="160" r="102"></circle></clipPath>
+              </defs>
+              <path d="M12 160h76" stroke="#ffc857" stroke-width="3"></path>
+              <path d="m77 151 14 9-14 9" fill="#ffc857"></path>
+              <text x="20" y="142" fill="#ffc857" font-size="12">SONNE</text>
+              <circle cx="210" cy="160" r="102" fill="url(#earthLight)"></circle>
+              <g clip-path="url(#earthClip)" fill="none" stroke="#a5ded5" opacity=".45">
+                <ellipse cx="210" cy="160" rx="42" ry="102"></ellipse>
+                <ellipse cx="210" cy="160" rx="83" ry="102"></ellipse>
+                <path d="M108 160h204M120 119q90 45 180 0M120 201q90-45 180 0"></path>
+              </g>
+              <path d="M210 52v216" stroke="#bed0db" opacity=".7" stroke-dasharray="4 5"></path>
+              <circle id="person-dot" cx="210" cy="160" r="8" fill="#fff" stroke="#10243a" stroke-width="3"></circle>
+              <text x="178" y="293" fill="#edf5f2" font-size="13">Erde · Achse</text>
+              <text id="day-svg-label" x="158" y="38" fill="#edf5f2" font-size="13">Ort: Tag</text>
+            </svg>
+            <p class="caption">Die beleuchtete Hälfte zeigt zur Sonne. Der Punkt wandert mit der Erdrotation.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="lesson dark-section" id="mondphasen">
+        <div class="lesson-head">
+          <span class="number">02</span>
+          <div><p class="kicker">LICHT UND BLICKRICHTUNG</p><h2>Warum verändert sich der Mond?</h2></div>
+        </div>
+        <div class="split reverse">
+          <div class="explain">
+            <p>Die Sonne beleuchtet stets eine Hälfte des Mondes. Während der Mond die Erde umrundet, sehen wir von der Erde aus unterschiedlich viel von dieser beleuchteten Hälfte. So entstehen die <strong>Mondphasen</strong>.</p>
+            <p>Der Mond erzeugt kein eigenes sichtbares Licht: Er reflektiert Sonnenlicht. Seine Rotation und sein Umlauf sind synchronisiert, deshalb wendet er der Erde ungefähr immer dieselbe Seite zu. Der Erdschatten verursacht nicht die normalen Mondphasen.</p>
+            <details><summary>Hilfekarte</summary><p>Die beleuchtete Mondhälfte bleibt zur Sonne gerichtet. Mit der Position des Mondes ändert sich, wie viel davon wir von der Erde aus sehen.</p></details>
+            <div class="task">
+              <h3>Aufgabe · Wähle eine Mondposition</h3>
+              <label for="moon-slider">Position auf der Umlaufbahn <output id="moon-value">Vollmond</output></label>
+              <input id="moon-slider" type="range" min="0" max="7" value="4" step="1">
+              <div class="feedback" id="moon-feedback" aria-live="polite"></div>
+            </div>
+          </div>
+          <div class="sim-card moon-card">
+            <div class="sim-title"><span>MOND UMLÄUFT ERDE</span><span class="live-dot">● LIVE-MODELL</span></div>
+            <svg id="moon-sim" viewBox="0 0 440 370" role="img" aria-label="Mondphasenmodell mit Sonne links, Erde in der Mitte und beweglichem Mond">
+              <defs>
+                <radialGradient id="sunGlow"><stop stop-color="#fff4bb"></stop><stop offset="1" stop-color="#ffc857"></stop></radialGradient>
+                <clipPath id="moonClip"><circle id="moonClipCircle" cx="220" cy="62" r="24"></circle></clipPath>
+              </defs>
+              <circle cx="220" cy="185" r="40" fill="#217985" stroke="#6ac7c1" stroke-width="3"></circle>
+              <path d="M220 148v74" stroke="#10243a" stroke-width="2"></path>
+              <circle cx="220" cy="185" r="123" fill="none" stroke="#718293" stroke-dasharray="4 7"></circle>
+              <circle cx="32" cy="185" r="25" fill="url(#sunGlow)"></circle>
+              <text x="15" y="232" fill="#dbe5e8" font-size="12">SONNE →</text>
+              <circle id="moon-body" cx="220" cy="62" r="24" fill="#f1eee4"></circle>
+              <circle id="moon-shadow" cx="220" cy="62" r="24" fill="#111d2c" clip-path="url(#moonClip)"></circle>
+              <circle id="moon-outline" cx="220" cy="62" r="24" fill="none" stroke="#e5e5de" stroke-width="2"></circle>
+              <text id="phase-label" x="220" y="340" text-anchor="middle" fill="#f1eee4" font-size="15">Vollmond</text>
+              <text x="184" y="245" fill="#dbe5e8" font-size="12">ERDE</text>
+            </svg>
+            <p class="caption">Vereinfachtes Modell von oben. Abstände und Größen sind nicht maßstabsgetreu.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="lesson" id="jahreszeiten">
+        <div class="lesson-head">
+          <span class="number">03</span>
+          <div><p class="kicker">ACHSE UND SONNENSTAND</p><h2>Wie entstehen Jahreszeiten?</h2></div>
+        </div>
+        <div class="split">
+          <div class="explain">
+            <p>Die Erdachse ist um etwa <strong>23,5°</strong> gegen die Senkrechte zur Erdbahnebene geneigt. Beim Umlauf um die Sonne bleibt sie im Raum annähernd in dieselbe Richtung ausgerichtet.</p>
+            <p>Ist die Nordhalbkugel zur Sonne geneigt, treffen die Sonnenstrahlen dort steiler auf und die Tage sind länger: Es ist Sommer. Ein halbes Jahr später ist die Nordhalbkugel von der Sonne weg geneigt: flachere Strahlen und kürzere Tage bringen Winter.</p>
+            <p><strong>Der Abstand der Erde zur Sonne ist nicht die Ursache.</strong> Auf der Südhalbkugel ist jeweils die entgegengesetzte Jahreszeit.</p>
+            <details><summary>Hilfekarte</summary><p>Achte auf zwei Dinge: Wie lange scheint die Sonne am Tag? Und wie gebündelt treffen ihre Strahlen auf den Boden? Beides verändert sich durch die Achsenneigung.</p></details>
+            <div class="task">
+              <h3>Aufgabe · Entdecke die Jahreszeiten</h3>
+              <label for="season-slider">Position der Erde <output id="season-value">Sommer auf der Nordhalbkugel</output></label>
+              <input id="season-slider" type="range" min="0" max="3" value="0" step="1">
+              <div class="feedback" id="season-feedback" aria-live="polite"></div>
+            </div>
+          </div>
+          <div class="sim-card">
+            <div class="sim-title"><span>ERDUMLAUF &amp; ACHSENNEIGUNG</span><span class="live-dot">● LIVE-MODELL</span></div>
+            <svg id="season-sim" viewBox="0 0 450 340" role="img" aria-label="Modell des Erdumlaufs und der geneigten, gleich ausgerichteten Erdachse">
+              <circle cx="225" cy="165" r="37" fill="#ffc857"></circle>
+              <circle cx="225" cy="165" r="62" fill="none" stroke="#ffc857" opacity=".25"></circle>
+              <ellipse cx="225" cy="165" rx="174" ry="125" fill="none" stroke="#758496" stroke-dasharray="4 7"></ellipse>
+              <path id="season-rays" d="M225 165 155 280" stroke="#ffc857" stroke-width="1.5" stroke-dasharray="5 5"></path>
+              <text id="season-rays-label" x="165" y="220" fill="#ffc857" font-size="12">Sonnenstrahlen</text>
+              <g id="season-earth">
+                <circle cx="225" cy="40" r="22" fill="#2d8b92" stroke="#8be1d5" stroke-width="2"></circle>
+                <path d="M216 60 234 20" stroke="#f3efe5" stroke-width="2"></path>
+              </g>
+              <text id="season-svg-label" x="225" y="320" text-anchor="middle" fill="#edf5f2" font-size="14">Nordhalbkugel: Sommer</text>
+            </svg>
+            <p class="caption">Die Erdachse bleibt in diesem vereinfachten Modell parallel ausgerichtet; Entfernungen sind nicht maßstabsgetreu.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="lesson dark-section" id="finsternisse">
+        <div class="lesson-head">
+          <span class="number">04</span>
+          <div><p class="kicker">WENN SICH SCHATTEN TREFFEN</p><h2>Sonnenfinsternis, Mondfinsternis &amp; Blutmond</h2></div>
+        </div>
+        <div class="split reverse">
+          <div class="explain">
+            <p>Bei einer <strong>Sonnenfinsternis</strong> steht der Mond zwischen Sonne und Erde. Sein Schatten fällt auf bestimmte Gebiete der Erde.</p>
+            <p>Bei einer <strong>Mondfinsternis</strong> steht die Erde zwischen Sonne und Mond; der Mond gerät in den Erdschatten. Die Bahnen sind leicht gegeneinander geneigt, deshalb gibt es nicht jeden Monat eine Finsternis.</p>
+            <p>Bei einer totalen Mondfinsternis kann der Mond rötlich erscheinen: Sonnenlicht wird in der Erdatmosphäre gebrochen. Blaues Licht wird stärker gestreut, während ein rötlicher Anteil in den Erdschatten gelangt und den Mond erreicht. Der Mond erzeugt dabei kein eigenes Licht und wird nicht heiß.</p>
+            <details><summary>Hilfekarte</summary><p>Sonnenfinsternis: Sonne – Mond – Erde. Mondfinsternis: Sonne – Erde – Mond. Das Licht kommt von der Sonne.</p></details>
+            <div class="task">
+              <h3>Aufgabe · Ordne die Himmelskörper</h3>
+              <label for="eclipse-choice">Welche Stellung zeigt eine Mondfinsternis?</label>
+              <select id="eclipse-choice">
+                <option value="">Bitte auswählen</option>
+                <option value="sun-earth-moon">Sonne – Erde – Mond</option>
+                <option value="sun-moon-earth">Sonne – Mond – Erde</option>
+                <option value="earth-sun-moon">Erde – Sonne – Mond</option>
+              </select>
+              <div class="feedback" id="eclipse-feedback" aria-live="polite">Tipp: Bei einer Mondfinsternis fällt der Erdschatten auf den Mond.</div>
+            </div>
+          </div>
+          <div class="sim-card">
+            <div class="sim-title"><span>FINSTERNIS-MODELL</span><span class="live-dot">● LICHT VON LINKS</span></div>
+            <div class="toggle-row" role="group" aria-label="Finsternis auswählen">
+              <button class="toggle active" type="button" data-eclipse="solar" aria-pressed="true">Sonnenfinsternis</button>
+              <button class="toggle" type="button" data-eclipse="lunar" aria-pressed="false">Mondfinsternis</button>
+            </div>
+            <svg id="eclipse-sim" viewBox="0 0 440 220" role="img" aria-label="Sonnenfinsternis: Sonne, Mond, Erde; der Mond steht zwischen Sonne und Erde">
+              <defs><linearGradient id="shadow" x1="0" x2="1"><stop stop-color="#a9b6bd" stop-opacity=".55"></stop><stop offset="1" stop-color="#a9b6bd" stop-opacity=".08"></stop></linearGradient></defs>
+              <path d="M58 110h326" stroke="#ffc857" stroke-width="2" stroke-dasharray="7 8"></path>
+              <circle cx="55" cy="110" r="29" fill="#ffc857"></circle>
+              <path id="eclipse-shadow" d="M166 107 352 96v28l-186-11z" fill="url(#shadow)"></path>
+              <circle id="eclipse-middle" cx="150" cy="110" r="16" fill="#c8d1d1" stroke="#f3efe5"></circle>
+              <circle id="eclipse-last" cx="354" cy="110" r="34" fill="#2d8b92" stroke="#8be1d5" stroke-width="2"></circle>
+              <text x="37" y="170" fill="#eaf0ed" font-size="12">SONNE</text>
+              <text id="middle-label" x="124" y="160" fill="#eaf0ed" font-size="12">MOND</text>
+              <text id="last-label" x="331" y="160" fill="#eaf0ed" font-size="12">ERDE</text>
+            </svg>
+            <p id="eclipse-caption" class="caption">Der Mond steht zwischen Sonne und Erde. Sein Schatten trifft die Erde.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="quiz" id="check">
+        <div class="lesson-head">
+          <span class="number">05</span>
+          <div><p class="kicker">ZEIG, WAS DU WEISST</p><h2>Dein Selbsttest</h2></div>
+        </div>
+        <p class="quiz-intro">Beantworte die fünf Fragen. Du bekommst direkt Rückmeldung und kannst es noch einmal versuchen.</p>
+        <form id="quiz-form">
+          <fieldset>
+            <legend>1. Was verursacht Tag und Nacht?</legend>
+            <label><input type="radio" name="q1" value="a"> Der Mond kreist um die Erde.</label>
+            <label><input type="radio" name="q1" value="b"> Die Erde dreht sich um ihre Achse.</label>
+            <label><input type="radio" name="q1" value="c"> Die Sonne wandert täglich um die Erde.</label>
+            <p class="answer-feedback" id="f1" aria-live="polite"></p>
+          </fieldset>
+          <fieldset>
+            <legend>2. Warum sehen wir Mondphasen?</legend>
+            <label><input type="radio" name="q2" value="a"> Der Mond wird von der Erde beschattet.</label>
+            <label><input type="radio" name="q2" value="b"> Der Mond leuchtet mal stärker und mal schwächer.</label>
+            <label><input type="radio" name="q2" value="c"> Wir sehen von der Erde aus unterschiedlich viel der sonnenbeleuchteten Mondhälfte.</label>
+            <p class="answer-feedback" id="f2" aria-live="polite"></p>
+          </fieldset>
+          <fieldset>
+            <legend>3. Was ist die Hauptursache der Jahreszeiten?</legend>
+            <label><input type="radio" name="q3" value="a"> Die geneigte Erdachse und der Umlauf der Erde um die Sonne.</label>
+            <label><input type="radio" name="q3" value="b"> Die Erde ist im Sommer viel näher an der Sonne.</label>
+            <label><input type="radio" name="q3" value="c"> Die Sonne wird im Winter kälter.</label>
+            <p class="answer-feedback" id="f3" aria-live="polite"></p>
+          </fieldset>
+          <fieldset>
+            <legend>4. Welche Reihenfolge braucht eine Sonnenfinsternis?</legend>
+            <label><input type="radio" name="q4" value="a"> Sonne – Erde – Mond.</label>
+            <label><input type="radio" name="q4" value="b"> Mond – Sonne – Erde.</label>
+            <label><input type="radio" name="q4" value="c"> Sonne – Mond – Erde.</label>
+            <p class="answer-feedback" id="f4" aria-live="polite"></p>
+          </fieldset>
+          <fieldset>
+            <legend>5. Warum erscheint der Mond beim Blutmond rötlich?</legend>
+            <label><input type="radio" name="q5" value="a"> Der Mond wird sehr heiß.</label>
+            <label><input type="radio" name="q5" value="b"> Rötliches Sonnenlicht wird in der Erdatmosphäre gebrochen und in den Erdschatten gelenkt.</label>
+            <label><input type="radio" name="q5" value="c"> Die Erde leuchtet rot.</label>
+            <p class="answer-feedback" id="f5" aria-live="polite"></p>
+          </fieldset>
+          <button class="button" type="submit">Test auswerten</button>
+          <button class="button secondary" type="reset">Nochmal versuchen</button>
+          <div class="quiz-result" id="quiz-result" aria-live="polite"></div>
+        </form>
+      </section>
+
+      <section class="worksheet-callout">
+        <div>
+          <p class="kicker">LERNEN OHNE DISPLAY</p>
+          <h2>Alles für dein Heft.</h2>
+          <p>Drucke die Arbeitsfassung mit den gleichen Lerninhalten, Aufgaben und Platz zum Zeichnen aus. Über „Als PDF speichern“ kannst du sie als PDF sichern.</p>
+        </div>
+        <div class="worksheet-actions">
+          <a class="button secondary" href="arbeitsblatt.pdf" download>Arbeitsblatt als PDF <span aria-hidden="true">↓</span></a>
+          <button class="button" id="print-button" type="button">Arbeitsfassung drucken / PDF speichern <span aria-hidden="true">↗</span></button>
+        </div>
+      </section>
+      <footer><span>Physik · Klasse 7</span><span>Modelle sind vereinfacht, die Erklärungen bleiben physikalisch korrekt.</span></footer>
+    </main>
+
+    <section id="print-worksheet" aria-label="Druck-Arbeitsfassung">
+      <div class="print-head">
+        <h1>Physik – Schatten aus dem All</h1>
+        <p>Arbeitsfassung · Physik Klasse 7</p>
+        <p>Name: ____________________________________  Datum: __________________</p>
+      </div>
+      <p><strong>Arbeitsauftrag:</strong> Lies die Erklärungen der Lernseite und bearbeite die Aufgaben. Nutze die freien Felder für Antworten und Skizzen.</p>
+      <h2>1 · Tag und Nacht</h2>
+      <p>a) Die beleuchtete Tagseite der Erde zeigt __________________________________</p>
+      <p>b) Die Nachtseite der Erde liegt __________________________________________</p>
+      <p>c) Erkläre: Warum ist es in Deutschland Nacht, wenn in Japan Tag ist?</p>
+      <div class="write-space"></div>
+      <h2>2 · Mondphasen</h2>
+      <p>a) Zeichne Sonne, Erde und Mond bei Neumond und Vollmond. Markiere, welche Mondhälfte von der Sonne beleuchtet wird.</p>
+      <div class="draw-grid">
+        <div>Neumond<div class="draw-space"></div></div>
+        <div>Vollmond<div class="draw-space"></div></div>
+      </div>
+      <p>b) Erkläre, warum wir von der Erde aus verschiedene Mondphasen sehen und wodurch sie nicht entstehen.</p>
+      <div class="write-space"></div>
+      <h2>3 · Jahreszeiten</h2>
+      <p>a) Nenne die zwei Gründe für die Jahreszeiten: ___________________________________</p>
+      <p>b) Warum ist auf der Nordhalbkugel Sommer, wenn sie zur Sonne geneigt ist?</p>
+      <div class="write-space"></div>
+      <p>c) Kreuze an: Jahreszeiten entstehen hauptsächlich durch ( ) den Abstand zur Sonne ( ) Achsenneigung und Umlauf.</p>
+      <h2>4 · Sonnen- und Mondfinsternis</h2>
+      <p>a) Ergänze: Sonnenfinsternis: Sonne – __________ – __________</p>
+      <p>b) Ergänze: Mondfinsternis: Sonne – __________ – __________</p>
+      <p>c) Warum gibt es nicht jeden Monat eine Finsternis?</p>
+      <div class="write-space"></div>
+      <p>d) Warum kann der Mond bei einer totalen Mondfinsternis rötlich erscheinen?</p>
+      <div class="write-space"></div>
+      <h2>5 · Selbstcheck</h2>
+      <p>Erkläre in einem Satz: Wie unterscheiden sich Mondphasen und Mondfinsternis?</p>
+      <div class="write-space"></div>
+    </section>
+  </body>
+</html>

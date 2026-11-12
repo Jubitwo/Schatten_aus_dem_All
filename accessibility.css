@@ -1,0 +1,44 @@
+.skip-link {
+  position: absolute;
+  z-index: 20;
+  top: -5rem;
+  left: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  background: #f4f1e8;
+  color: #10243a;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+:focus-visible {
+  outline: 3px solid #147d79;
+  outline-offset: 3px;
+}
+
+.dark-section :focus-visible {
+  outline-color: #ffc857;
+}
+
+.task select {
+  width: 100%;
+  min-height: 46px;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid #89999b;
+  border-radius: 8px;
+  background: #fff;
+  color: #15283a;
+  font: inherit;
+}
+
+.toggle {
+  min-height: 44px;
+}
+
+@media print {
+  .skip-link {
+    display: none;
+  }
+}
